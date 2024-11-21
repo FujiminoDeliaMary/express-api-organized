@@ -1,26 +1,5 @@
-import express from 'express';
-import sqlite3 from 'sqlite3';
-//Nous mettrions donc ici des require pour appeler le fichier qui contient la bd et le/les fichiers avec les opérations CRUD. 
+//Opérations crud Concernant les produits ici.
 
-// La création de l'instance de la base de donnée devrait se faire dans un autre fichier 
-const db = new sqlite3.Database('./products.db', (err) => {
-    if (err) {
-        console.error(err.message);
-    }
-    console.log('Connected to the products database.');
-});
-
-
-// La création de l'instnce d'application d'express peut rester ici.
-const app = express()
-app.use(express.json());
-
-
-
-//Les opérations crud pourraient se faire dans un autre fichier aussi(chaque table aurait un fichier pour les opérations CRUD)
-//Puis faire un appel des deux dans le fichier app
-
-// GET products
 app.get('/products', (req, res) => {
     db.all('SELECT * FROM products', (err, rows) => {
         if (err) {
@@ -88,6 +67,3 @@ app.delete('/products/:id', (req, res) => {
         }
     });
 });
-
-export default app
-
